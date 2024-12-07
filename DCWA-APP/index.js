@@ -34,15 +34,29 @@ app.get('/students', (req, res) =>
   {
     pool.query('SELECT * FROM student').then((data) =>
       {
-          console.log(data);
+          //console.log(data);
           res.render('pages/students',{students: data});
       }).catch((err) => 
       {
           console.log('Error querying MySQL');
           console.log(err);
       });
-
 })
+
+app.get('/students/edit/:sid', (req, res) =>
+{
+  console.log("Edit student with sid: " + req.params.sid);
+
+  pool.query('SELECT * FROM student WHERE sid = ?', [req.params.sid]).then((data) =>
+  {
+      console.log(data);
+      res.render('pages/editStudent',{student: data[0]});
+  }).catch((err) =>
+  {
+      console.log('Error querying MySQL');
+      console.log(err);
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

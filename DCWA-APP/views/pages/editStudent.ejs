@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+
+
+<main>
+    <div class="jumbotron">
+        <h1>Update Student: <%=student.name %></h1>
+    
+    </div>
+
+    <div class="d-flex flex-column">
+        <a href="/">Home</a>
+        
+    </div>
+
+    <div class="d-flex flex-column">
+        <form>
+            <div class="form-group">
+                <label for="sid">Student ID</label>
+                <input type="text" class="form-control" id="sid" value="<%= student.sid %>" readonly>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" value="<%= student.name %>" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="text" class="form-control" id="age" value="<%= student.age %>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+
+        </form>>
+    </div>
+
+    
+</main>
+
+
+
+</body>
+</html>
