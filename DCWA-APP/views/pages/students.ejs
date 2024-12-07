@@ -18,7 +18,29 @@
         <a href="">Add Student</a>
     </div>
 
-
+    <div id="studentDataTable">
+        <% if (students.length <= 0) { %>
+            <h2>No Students Found</h2>
+        <% } else { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% students.forEach(student => { %>
+                        <tr>
+                            <td><%= student.sid %></td>
+                            <td><%= student.name %></td>
+                            <td><%= student.age %></td>
+                        </tr>
+                    <% }); %>
+            </table>
+        <% } %>
+    </div>
 </main>
 
 

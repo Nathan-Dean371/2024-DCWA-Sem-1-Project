@@ -35,10 +35,7 @@ app.get('/students', (req, res) =>
     pool.query('SELECT * FROM student').then((data) =>
       {
           console.log(data);
-          res.render('pages/students',
-          {
-              studentArray: data
-          });
+          res.render('pages/students',{students: data});
       }).catch((err) => 
       {
           console.log('Error querying MySQL');
