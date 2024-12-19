@@ -16,25 +16,34 @@
     <div class="d-flex flex-column">
         <a href="/">Home</a>
         
+        <% if( errors != undefined) { %>
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    <% errors.forEach(error => { %>
+                        <li><%= error.msg %></li>
+                    <% }); %>
+                </ul>
+            </div>
+        <% } %>
     </div>
 
     <div class="d-flex flex-column">
-        <form>
+        <form action="/students/edit/<%= student.sid %>" method="POST">
             <div class="form-group">
                 <label for="sid">Student ID</label>
-                <input type="text" class="form-control" id="sid" value="<%= student.sid %>" readonly>
+                <input type="text" class="form-control" name="sid" id="sid" value="<%= student.sid %>" readonly>
             </div>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" value="<%= student.name %>" required>
+                <input type="text" class="form-control" name="name" id="name" value="<%= student.name %>" required>
             </div>
             <div class="form-group">
                 <label for="age">Age</label>
-                <input type="text" class="form-control" id="age" value="<%= student.age %>" required>
+                <input type="text" class="form-control" name="age" id="age" value="<%= student.age %>" required>
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
 
-        </form>>
+        </form>
     </div>
 
     
