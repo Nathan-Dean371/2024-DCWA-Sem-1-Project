@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<main>
+    <div class="jumbotron">
+        <h1>Lecturer Page</h1>
+    
+    </div>
+
+    <div class="d-flex flex-column">
+        <a href="/">Home</a>
+        
+    </div>
+
+    <div id="lecturerDataTable">
+        <% if (lecturers.length <= 0) { %>
+            <h2>No lecturers Found</h2>
+        <% } else { %>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Lecturer ID</th>
+                        <th>Name</th>
+                        <th>Department ID</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% lecturers.forEach(lecturer => { %>
+                        <tr>
+                            <td><%= lecturer._id %></td>
+                            <td><%= lecturer.name%></td>
+                            <td><%= lecturer.did %></td>
+                            <td><button class="btn btn-primary" onClick="location.href='/lecturers/delete/<%= lecturer._id %>'">Delete</button></td>
+                            
+                            </tr>
+                    <% }); %>
+            </table>
+        <% } %>
+    </div>
+</main>
+
+
+
+</body>
+</html>

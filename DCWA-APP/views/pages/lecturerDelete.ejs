@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+</head>
+<body class="container">
+
+<main>
+    <div class="jumbotron">
+        <h1></h1>
+    
+    </div>
+
+    <div class="d-flex flex-column">
+        <a href="/">Home</a>
+        
+    </div>
+
+    <div id="">
+        <% if (error) { %>
+            <h1>Error Message</h1>
+            <h2><%= error %></h2>
+        <% } else { %>
+            <h2>Lecturer Deleted</h2>
+        <% } %>
+        
+    </div>
+</main>
+
+
+
+</body>
+</html>

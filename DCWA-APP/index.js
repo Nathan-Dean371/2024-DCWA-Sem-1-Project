@@ -1,6 +1,8 @@
 const express = require('express')
 const pmysql = require('promise-mysql');
 const { check, validationResult } = require('express-validator');
+const MongoClient = require("mongodb").MongoClient;
+const dao = require('./DAO.js');
 require('dotenv').config()
 const path = require('path')
 const app = express()
@@ -147,6 +149,56 @@ app.get('/grades', (req, res) =>
   });
   
 });
+
+app.get('/lecturers', (req, res) =>
+{
+  console.log("Lecturers page requested");
+  
+  
+  dao.findAll().then((data) =>
+  {
+      res.render('pages/lecturers',{lecturers: data});
+  }
+  ).catch((err) =>
+  {
+      console.log('Error querying MongoDB');
+      console.log(err);
+  });
+});
+
+app.get('/lecturers/delete/:lid', (req, res) => 
+{
+  console.log("Delete lecturer with lid: " + req.params.lid);
+
+  //Use the lid to check on the sql module table to see if the lecturer is assigned to any modules
+  pool.query('SELECT * FROM module WHERE lecturer = ?', [req.params.lid]).then((data) =>
+  {
+      if(data.length > 0)
+      {
+          res.render('pages/lecturerDelete',{lid: req.params.lid, error: "Cannot delete lecturer " + req.params.lid + " as they are assigned to modules"});
+      }
+      else
+      {
+        //Delete the lecturer from the MongoDB collection
+        dao.deleteLecturer(req.params.lid).then((data) =>
+        {
+            res.redirect('/lecturers');
+        }).catch((err) =>
+        {
+            console.log('Error querying MongoDB');
+            console.log(err);
+        });
+      }
+  }).catch((err) =>
+  {
+      console.log('Error querying MySQL');
+      console.log(err);
+  });
+  
+});
+  
+  
+
 
 app.listen(port, () => {
   console.log(`Nathan Dean - DCWA Project listening on port ${port}`)
